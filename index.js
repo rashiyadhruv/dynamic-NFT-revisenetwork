@@ -168,8 +168,8 @@ async function API() {
 
 async function run() {
   const collection = await revise.addCollection({
-    name: "The Earthquake",
-    uri: "the-earthq",
+    name: "The-Earth",
+    uri: "theearth",
   });
   console.log("Collection created", collection);
 }
@@ -177,14 +177,15 @@ async function run() {
 async function add() {
   const res = await revise.addNFT(
     {
-      name: "The Earth 3",
+      name: "Earth",
       tokenId: "1",
-      description: "Change in weather",
+      description:
+        "This is not just a mere NFT but is The Earth itself and it has emotions !!! Voila !!! , It will feel sad when the emissions in the linked location increase in comparison to yesterday and happy when less compared to yesterday. Try to keep it happy ALWAYS",
       image:
-        "https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg",
+        "",
     },
     [{ condition: "neutral" }, { location: "Gandhinagar" }],
-    "db646ee0-d220-4555-9799-ad848a40ffb2"
+    "b061f1ec-660f-4873-b9cc-8a5858ca23a8"
   );
 
   console.log(res);
@@ -207,4 +208,4 @@ async function update() {
     });
 }
 
-update();
+run();
