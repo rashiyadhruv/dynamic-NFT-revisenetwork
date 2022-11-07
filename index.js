@@ -11,54 +11,87 @@ const rainycodes = [
   1192, 1195, 1198, 1201, 1240, 1243, 1246, 1273, 1276,
 ];
 
-const winter = [
+const all = [
   {
     condition: "Neutral",
-    image: "https://mjeksiaislame.com/wp-content/uploads/2022/04/aktrim.jpg",
+    image: "https://i.ibb.co/bRmpNVM/Frame-62.gif",
   },
   {
     condition: "Better",
-    image:
-      "https://img.freepik.com/free-photo/wide-angle-shot-single-tree-growing-clouded-sky-during-sunset-surrounded-by-grass_181624-22807.jpg?w=2000",
+    image: "https://i.ibb.co/p3LXdZN/Frame-100.gif",
   },
   {
     condition: "Worse",
-    image:
-      "https://files.worldwildlife.org/wwfcmsprod/images/Stormy_sunrise_over_the_Badlands/magazine_hero/9jerns69ib_tevin_trinh_xzPSjPdRcC0_unsplash.jpg",
+    image: "https://i.ibb.co/hHPMMMK/Frame-61.gif",
+  },
+  {
+    condition: "Neutral",
+    image: "https://i.ibb.co/4dXWQhC/Frame-57.gif",
+  },
+  {
+    condition: "Better",
+    image: "https://i.ibb.co/pjKpGBB/Frame-99.gif",
+  },
+  {
+    condition: "Worse",
+    image: "https://i.ibb.co/2KRymZk/Frame-58.gif",
+  },
+  {
+    condition: "Neutral",
+    image: "https://i.ibb.co/2nVHNsh/Frame-97.gif",
+  },
+  {
+    condition: "Better",
+    image: "https://i.ibb.co/tZgTN0s/Frame-98.gif",
+  },
+  {
+    condition: "Worse",
+    image: "https://i.ibb.co/rm1j0FG/Frame-96.gif",
+  },
+];
+
+const winter = [
+  {
+    condition: "Neutral",
+    image: "https://i.ibb.co/bRmpNVM/Frame-62.gif",
+  },
+  {
+    condition: "Better",
+    image: "https://i.ibb.co/p3LXdZN/Frame-100.gif",
+  },
+  {
+    condition: "Worse",
+    image: "https://i.ibb.co/hHPMMMK/Frame-61.gif",
   },
 ];
 
 const summer = [
   {
     condition: "Neutral",
-    image: "https://mjeksiaislame.com/wp-content/uploads/2022/04/aktrim.jpg",
+    image: "https://i.ibb.co/4dXWQhC/Frame-57.gif",
   },
   {
     condition: "Better",
-    image:
-      "https://img.freepik.com/free-photo/wide-angle-shot-single-tree-growing-clouded-sky-during-sunset-surrounded-by-grass_181624-22807.jpg?w=2000",
+    image: "https://i.ibb.co/pjKpGBB/Frame-99.gif",
   },
   {
     condition: "Worse",
-    image:
-      "https://files.worldwildlife.org/wwfcmsprod/images/Stormy_sunrise_over_the_Badlands/magazine_hero/9jerns69ib_tevin_trinh_xzPSjPdRcC0_unsplash.jpg",
+    image: "https://i.ibb.co/2KRymZk/Frame-58.gif",
   },
 ];
 
 const monsoon = [
   {
     condition: "Neutral",
-    image: "https://mjeksiaislame.com/wp-content/uploads/2022/04/aktrim.jpg",
+    image: "https://i.ibb.co/2nVHNsh/Frame-97.gif",
   },
   {
     condition: "Better",
-    image:
-      "https://img.freepik.com/free-photo/wide-angle-shot-single-tree-growing-clouded-sky-during-sunset-surrounded-by-grass_181624-22807.jpg?w=2000",
+    image: "https://i.ibb.co/tZgTN0s/Frame-98.gif",
   },
   {
     condition: "Worse",
-    image:
-      "https://files.worldwildlife.org/wwfcmsprod/images/Stormy_sunrise_over_the_Badlands/magazine_hero/9jerns69ib_tevin_trinh_xzPSjPdRcC0_unsplash.jpg",
+    image: "https://i.ibb.co/rm1j0FG/Frame-96.gif",
   },
 ];
 
@@ -164,6 +197,8 @@ async function API() {
     index = 1;
   }
   return targetweather[index];
+  // let randomindex = Math.floor(Math.random() * 9);
+  // return all[randomindex];
 }
 
 async function run() {
@@ -181,10 +216,9 @@ async function add() {
       tokenId: "1",
       description:
         "This is not just a mere NFT but is The Earth itself and it has emotions !!! Voila !!! , It will feel sad when the emissions in the linked location increase in comparison to yesterday and happy when less compared to yesterday. Try to keep it happy ALWAYS",
-      image:
-        "",
+      image: "https://i.ibb.co/4dXWQhC/Frame-57.gif",
     },
-    [{ condition: "neutral" }, { location: "Gandhinagar" }],
+    [{ condition: "Neutral" }, { location: "Gandhinagar" }],
     "b061f1ec-660f-4873-b9cc-8a5858ca23a8"
   );
 
@@ -192,7 +226,7 @@ async function add() {
 }
 
 async function update() {
-  const res = await revise.fetchNFT("2d1595f9-4d8e-46e7-b243-81b42083f02f");
+  const res = await revise.fetchNFT("2f04b651-8e14-467a-9806-0197fc7775e2");
   const nft = revise.nft(res);
   nftt = nft;
 
@@ -202,10 +236,13 @@ async function update() {
     .every("10s")
     .listenTo(API)
     .start(async (data) => {
-      await nft.setProperty("mood", data.condition).setImage(data.image).save();
+      await nft
+        .setProperty("condition", data.condition)
+        .setImage(data.image)
+        .save();
 
-      console.log("Mood", data.condition);
+      console.log("condition", data.condition);
     });
 }
 
-run();
+update();
