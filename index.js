@@ -1,4 +1,9 @@
-const { key, collectionId } = require("./config.js");
+const {
+  key,
+  collectionId,
+  openweatherapikey,
+  weatherapikey,
+} = require("./config.js");
 const { Revise } = require("revise-sdk");
 const revise = new Revise({ auth: key });
 const axios = require("axios");
@@ -105,7 +110,7 @@ async function API() {
     url: "https://weatherapi-com.p.rapidapi.com/history.json",
     params: { q: location, dt: "2022-11-06", lang: "en" },
     headers: {
-      "X-RapidAPI-Key": "a6035ffd3emsh9df388f8b3b4414p19f3f6jsnb2e90f295d22",
+      "X-RapidAPI-Key": weatherapikey,
       "X-RapidAPI-Host": "weatherapi-com.p.rapidapi.com",
     },
   };
@@ -140,7 +145,7 @@ async function API() {
   console.log("yesterdays", todays, todaye);
   const options2 = {
     method: "GET",
-    url: `http://api.openweathermap.org/data/2.5/air_pollution/history?lat=23.2156&lon=72.6369&start=${todays}&end=${todaye}&appid=1b2216d0512914356278613cd4ca3857`,
+    url: `http://api.openweathermap.org/data/2.5/air_pollution/history?lat=23.2156&lon=72.6369&start=${todays}&end=${todaye}&appid=${openweatherapikey}`,
   };
   await axios(options2)
     .then(async function (res) {
@@ -219,7 +224,7 @@ async function add() {
       image: "https://i.ibb.co/4dXWQhC/Frame-57.gif",
     },
     [{ condition: "Neutral" }, { location: "Gandhinagar" }],
-    "b061f1ec-660f-4873-b9cc-8a5858ca23a8"
+    collectionId
   );
 
   console.log(res);
